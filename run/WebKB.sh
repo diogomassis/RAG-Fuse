@@ -4,7 +4,7 @@ model=RetrieverBERT
 
 text_max_length=256
 label_max_length=256
-label_enhancement=NONE
+label_enhancement=LLM
 text_features_source=TXT
 
 ## sparse_retrieve
@@ -52,7 +52,7 @@ do
     trainer.max_epochs=5 \
     trainer.patience=3 \
     model=$model \
-    model.name=RAW_${model} \
+    model.name=LLM_${model} \
     data=$data \
     data.text_max_length=$text_max_length \
     data.label_max_length=$label_max_length \
@@ -62,7 +62,7 @@ do
     data.num_workers=12 \
     data.folds=[$fold_idx]
   time_end=$(date '+%Y-%m-%d %H:%M:%S')
-  echo "$time_start,$time_end" > resource/time/fit_RAW_${model}_${data}_${fold_idx}.tmr
+  echo "$time_start,$time_end" > resource/time/fit_LLM_${model}_${data}_${fold_idx}.tmr
 done
 
 # dense_retrieve predict
@@ -74,7 +74,7 @@ do
     trainer.max_epochs=5 \
     trainer.patience=3 \
     model=$model \
-    model.name=RAW_${model} \
+    model.name=LLM_${model} \
     data=$data \
     data.text_max_length=$text_max_length \
     data.label_max_length=$label_max_length \
@@ -84,7 +84,7 @@ do
     data.num_workers=12 \
     data.folds=[$fold_idx]
   time_end=$(date '+%Y-%m-%d %H:%M:%S')
-  echo "$time_start,$time_end" > resource/time/predict_RAW_${model}_${data}_${fold_idx}.tmr
+  echo "$time_start,$time_end" > resource/time/predict_LLM_${model}_${data}_${fold_idx}.tmr
 done
 
 # dense_retrieve eval
@@ -96,7 +96,7 @@ do
     trainer.max_epochs=5 \
     trainer.patience=3 \
     model=$model \
-    model.name=RAW_${model} \
+    model.name=LLM_${model} \
     data=$data \
     data.text_max_length=$text_max_length \
     data.label_max_length=$label_max_length \
@@ -106,7 +106,7 @@ do
     data.num_workers=12 \
     data.folds=[$fold_idx]
   time_end=$(date '+%Y-%m-%d %H:%M:%S')
-  echo "$time_start,$time_end" > resource/time/eval_RAW_${model}_${data}_${fold_idx}.tmr
+  echo "$time_start,$time_end" > resource/time/eval_LLM_${model}_${data}_${fold_idx}.tmr
 done
 
 # fuse
@@ -116,12 +116,12 @@ do
   python main.py \
     tasks=[fuse] \
     model=$model \
-    model.name=RAW_${model} \
+    model.name=LLM_${model} \
     data=$data \
     data.text_features_source=$text_features_source \
     data.folds=[$fold_idx]
   time_end=$(date '+%Y-%m-%d %H:%M:%S')
-  echo "$time_start,$time_end" > resource/time/fuse_RAW_${model}_${data}_${fold_idx}.tmr
+  echo "$time_start,$time_end" > resource/time/fuse_LLM_${model}_${data}_${fold_idx}.tmr
 done
 
 # aggregate
@@ -131,7 +131,7 @@ do
   python main.py \
     tasks=[aggregate] \
     model=$model \
-    model.name=RAW_${model} \
+    model.name=LLM_${model} \
     data=$data \
     data.text_max_length=$text_max_length \
     data.label_max_length=$label_max_length \
@@ -141,5 +141,5 @@ do
     data.num_workers=12 \
     data.folds=[$fold_idx]
   time_end=$(date '+%Y-%m-%d %H:%M:%S')
-  echo "$time_start,$time_end" > resource/time/aggregate_RAW_${model}_${data}_${fold_idx}.tmr
+  echo "$time_start,$time_end" > resource/time/aggregate_LLM_${model}_${data}_${fold_idx}.tmr
 done
