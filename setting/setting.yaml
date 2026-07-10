@@ -5,6 +5,8 @@ defaults:
 
 tasks: [ "label_desc" ]
 
+label_enhancement: ${data.label_enhancement}
+
 trainer:
   max_epochs: 5
   accelerator: gpu

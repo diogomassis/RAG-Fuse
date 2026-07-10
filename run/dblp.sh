@@ -33,7 +33,7 @@ do
     data=$data \
     data.text_max_length=$text_max_length \
     data.label_max_length=$label_max_length \
-    label_enhancement=NONE \
+    data.label_enhancement=NONE \
     data.text_features_source="$text_features_source" \
     data.batch_size=16 \
     data.num_workers=0 \
@@ -55,7 +55,7 @@ do
     data=$data \
     data.text_max_length=$text_max_length \
     data.label_max_length=$label_max_length \
-    label_enhancement=NONE \
+    data.label_enhancement=NONE \
     data.text_features_source="$text_features_source" \
     data.batch_size=16 \
     data.num_workers=0 \
@@ -77,7 +77,7 @@ do
     data=$data \
     data.text_max_length=$text_max_length \
     data.label_max_length=$label_max_length \
-    label_enhancement=NONE \
+    data.label_enhancement=NONE \
     data.text_features_source="$text_features_source" \
     data.batch_size=16 \
     data.num_workers=0 \
@@ -113,7 +113,7 @@ do
     data=$data \
     data.text_max_length=$text_max_length \
     data.label_max_length=$label_max_length \
-    label_enhancement=NONE \
+    data.label_enhancement=NONE \
     data.text_features_source="$text_features_source" \
     data.batch_size=16 \
     data.num_workers=0 \
