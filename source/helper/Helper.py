@@ -4,6 +4,14 @@ import tempfile
 from pathlib import Path
 
 import pandas as pd
+import numpy as np
+
+# NumPy 2 removed aliases still referenced indirectly by tensorboard/tensorflow.
+if not hasattr(np, "string_"):
+    np.string_ = np.bytes_
+if not hasattr(np, "unicode_"):
+    np.unicode_ = np.str_
+
 import wandb
 from omegaconf import OmegaConf
 from pytorch_lightning import loggers
