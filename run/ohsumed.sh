@@ -1,30 +1,54 @@
 # overrides
-data=pang_movie_2L
+data=ohsumed
 model=RetrieverBERT
+
 text_max_length=256
 label_max_length=256
-label_enhancement=NONE
+label_enhancement=LLM
 text_features_source=TXT
 
-## sparse_retrieve
+# sparse_retrieve
 for fold_idx in $(seq $1 $2);
 do
   time_start=$(date '+%Y-%m-%d %H:%M:%S')
-  python main.py data.num_workers=0 data.batch_size=16 \
+  python main.py \
     tasks=[sparse_retrieve] \
     model=BM25 \
     data=$data \
-    data.text_features_source="$text_features_source" \
+    data.text_features_source=$text_features_source \
     data.folds=[$fold_idx]
   time_end=$(date '+%Y-%m-%d %H:%M:%S')
   echo "$time_start,$time_end" > resource/time/sparse_retrieve_${data}_${fold_idx}.tmr
 done
 
+## prompt_opt
+#time_start=$(date '+%Y-%m-%d %H:%M:%S')
+#python main.py \
+#  tasks=[prompt_opt] \
+#  data=$data \
+#  data.text_features_source=$text_features_source
+#time_end=$(date '+%Y-%m-%d %H:%M:%S')
+#echo "$time_start,$time_end" > resource/time/prompt_opt_${data}_${fold_idx}.tmr
+
+## label_desc
+#for fold_idx in $(seq $1 $2);
+#do
+#  time_start=$(date '+%Y-%m-%d %H:%M:%S')
+#  python main.py \
+#    tasks=[label_desc] \
+#    data=$data \
+#    data.text_features_source=$text_features_source \
+#    data.folds=[$fold_idx]
+#  time_end=$(date '+%Y-%m-%d %H:%M:%S')
+#  echo "$time_start,$time_end" > resource/time/label_desc_${data}_${fold_idx}.tmr
+#done
+
+
 # dense_retrieve fit
 for fold_idx in $(seq $1 $2);
 do
   time_start=$(date '+%Y-%m-%d %H:%M:%S')
-  python main.py data.num_workers=0 data.batch_size=16 \
+  python main.py \
     tasks=[fit] \
     trainer.max_epochs=5 \
     trainer.patience=3 \
@@ -33,10 +57,10 @@ do
     data=$data \
     data.text_max_length=$text_max_length \
     data.label_max_length=$label_max_length \
-    data.label_enhancement=NONE \
-    data.text_features_source="$text_features_source" \
-    data.batch_size=16 \
-    data.num_workers=0 \
+    data.label_enhancement=$label_enhancement \
+    data.text_features_source=$text_features_source \
+    data.batch_size=32 \
+    data.num_workers=12 \
     data.folds=[$fold_idx]
   time_end=$(date '+%Y-%m-%d %H:%M:%S')
   echo "$time_start,$time_end" > resource/time/fit_LLM_${model}_${data}_${fold_idx}.tmr
@@ -46,7 +70,7 @@ done
 for fold_idx in $(seq $1 $2);
 do
   time_start=$(date '+%Y-%m-%d %H:%M:%S')
-  python main.py data.num_workers=0 data.batch_size=16 \
+  python main.py \
     tasks=[predict] \
     trainer.max_epochs=5 \
     trainer.patience=3 \
@@ -55,10 +79,10 @@ do
     data=$data \
     data.text_max_length=$text_max_length \
     data.label_max_length=$label_max_length \
-    data.label_enhancement=NONE \
-    data.text_features_source="$text_features_source" \
-    data.batch_size=16 \
-    data.num_workers=0 \
+    data.label_enhancement=$label_enhancement \
+    data.text_features_source=$text_features_source \
+    data.batch_size=64 \
+    data.num_workers=12 \
     data.folds=[$fold_idx]
   time_end=$(date '+%Y-%m-%d %H:%M:%S')
   echo "$time_start,$time_end" > resource/time/predict_LLM_${model}_${data}_${fold_idx}.tmr
@@ -68,7 +92,7 @@ done
 for fold_idx in $(seq $1 $2);
 do
   time_start=$(date '+%Y-%m-%d %H:%M:%S')
-  python main.py data.num_workers=0 data.batch_size=16 \
+  python main.py \
     tasks=[eval] \
     trainer.max_epochs=5 \
     trainer.patience=3 \
@@ -77,10 +101,10 @@ do
     data=$data \
     data.text_max_length=$text_max_length \
     data.label_max_length=$label_max_length \
-    data.label_enhancement=NONE \
-    data.text_features_source="$text_features_source" \
-    data.batch_size=16 \
-    data.num_workers=0 \
+    data.label_enhancement=$label_enhancement \
+    data.text_features_source=$text_features_source \
+    data.batch_size=64 \
+    data.num_workers=12 \
     data.folds=[$fold_idx]
   time_end=$(date '+%Y-%m-%d %H:%M:%S')
   echo "$time_start,$time_end" > resource/time/eval_LLM_${model}_${data}_${fold_idx}.tmr
@@ -90,12 +114,12 @@ done
 for fold_idx in $(seq $1 $2);
 do
   time_start=$(date '+%Y-%m-%d %H:%M:%S')
-  python main.py data.num_workers=0 data.batch_size=16 \
+  python main.py \
     tasks=[fuse] \
     model=$model \
     model.name=LLM_${model} \
     data=$data \
-    data.text_features_source="$text_features_source" \
+    data.text_features_source=$text_features_source \
     data.folds=[$fold_idx]
   time_end=$(date '+%Y-%m-%d %H:%M:%S')
   echo "$time_start,$time_end" > resource/time/fuse_LLM_${model}_${data}_${fold_idx}.tmr
@@ -106,17 +130,17 @@ done
 for fold_idx in $(seq $1 $2);
 do
   time_start=$(date '+%Y-%m-%d %H:%M:%S')
-  python main.py data.num_workers=0 data.batch_size=16 \
+  python main.py \
     tasks=[aggregate] \
     model=$model \
     model.name=LLM_${model} \
     data=$data \
     data.text_max_length=$text_max_length \
     data.label_max_length=$label_max_length \
-    data.label_enhancement=NONE \
-    data.text_features_source="$text_features_source" \
-    data.batch_size=16 \
-    data.num_workers=0 \
+    data.label_enhancement=$label_enhancement \
+    data.text_features_source=$text_features_source \
+    data.batch_size=64 \
+    data.num_workers=12 \
     data.folds=[$fold_idx]
   time_end=$(date '+%Y-%m-%d %H:%M:%S')
   echo "$time_start,$time_end" > resource/time/aggregate_LLM_${model}_${data}_${fold_idx}.tmr

@@ -1,13 +1,13 @@
 # overrides
-data=TWITTER
-model=RetrieverRoBERTa
+data=webkb
+model=RetrieverBERT
 
-text_max_length=128
+text_max_length=256
 label_max_length=256
 label_enhancement=LLM
 text_features_source=TXT
 
-# sparse_retrieve
+## sparse_retrieve
 for fold_idx in $(seq $1 $2);
 do
   time_start=$(date '+%Y-%m-%d %H:%M:%S')
@@ -28,7 +28,7 @@ done
 #  data=$data \
 #  data.text_features_source=$text_features_source
 #time_end=$(date '+%Y-%m-%d %H:%M:%S')
-#echo "$time_start,$time_end" > resource/time/prompt_opt_${data}_${fold_idx}.tmr
+#echo "$time_start,$time_end" > resource/time/prompt_opt_${data}.tmr
 
 ## label_desc
 #for fold_idx in $(seq $1 $2);
@@ -53,13 +53,12 @@ do
     trainer.patience=3 \
     model=$model \
     model.name=LLM_${model} \
-    model.encoder.architecture=cardiffnlp/twitter-roberta-base-dec2021-tweet-topic-single-all \
     data=$data \
     data.text_max_length=$text_max_length \
     data.label_max_length=$label_max_length \
     data.label_enhancement=$label_enhancement \
     data.text_features_source=$text_features_source \
-    data.batch_size=64 \
+    data.batch_size=32 \
     data.num_workers=12 \
     data.folds=[$fold_idx]
   time_end=$(date '+%Y-%m-%d %H:%M:%S')
@@ -124,7 +123,6 @@ do
   time_end=$(date '+%Y-%m-%d %H:%M:%S')
   echo "$time_start,$time_end" > resource/time/fuse_LLM_${model}_${data}_${fold_idx}.tmr
 done
-
 
 # aggregate
 for fold_idx in $(seq $1 $2);

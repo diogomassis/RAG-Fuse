@@ -1,5 +1,5 @@
-name: subj
-dir: resource/dataset/subj/
+name: acm
+dir: resource/dataset/acm/
 
 folds: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
 splits: [ "train", "val", "test" ]
@@ -9,8 +9,8 @@ text_max_length: 256
 label_max_length: 16
 vocabulary_size: 10000
 
-num_labels: 2
-num_texts: 0
+num_labels: 11
+num_texts: 24897
 num_relevant_labels: 1
 
 llm:

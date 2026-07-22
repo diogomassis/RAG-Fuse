@@ -1,5 +1,5 @@
-name: vader_movie_2L
-dir: resource/dataset/vader_movie_2L/
+name: reut90
+dir: resource/dataset/reut90/
 
 folds: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
 splits: [ "train", "val", "test" ]
@@ -9,13 +9,13 @@ text_max_length: 256
 label_max_length: 16
 vocabulary_size: 10000
 
-num_labels: 2
-num_texts: 0
+num_labels: 90
+num_texts: 13327
 num_relevant_labels: 1
 
 llm:
   prompt_opt:
-    num_targets_labels: 4
+    num_targets_labels: 16
     num_samples_per_target_label: 16
 
 batch_size: 64
