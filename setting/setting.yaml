@@ -58,7 +58,7 @@ llm:
 
   server:
     base_url: "http://localhost:8001/v1"
-    model: "/home/datalake/models/llama3-8b"
+    model: "meta-llama/Meta-Llama-3-8B-Instruct"
 
   prompt_opt:
     num_targets_labels: ${data.llm.prompt_opt.num_targets_labels}
