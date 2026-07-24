@@ -1,0 +1,9 @@
+Given a set of texts and their corresponding labels, generate a concise and informative description for the target label. The description should capture the essence of the label by focusing on technical aspects, key concepts, and challenges involved.
+
+Texts and Labels:
+{text_label_pairs}
+
+Instruction:
+Please provide a detailed and accurate description for the target label. The description should be a single paragraph summarizing the key technical aspects, concepts, and challenges related to the label as indicated in the provided texts.
+
+{target_label}:
