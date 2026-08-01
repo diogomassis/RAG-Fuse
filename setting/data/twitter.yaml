@@ -1,5 +1,5 @@
-name: TWITTER
-dir: resource/dataset/TWITTER/
+name: twitter
+dir: resource/dataset/twitter/
 
 folds: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
 splits: [ "train", "val", "test" ]
