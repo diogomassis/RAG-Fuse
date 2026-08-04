@@ -1,0 +1,2 @@
+,nDCG_tail@1,nDCG_tail@5,nDCG_tail@10,nDCG_head@1,nDCG_head@5,nDCG_head@10,Precision_tail@1,Precision_tail@5,Precision_tail@10,Precision_head@1,Precision_head@5,Precision_head@10,Mac-F1@1,Mac-F1@5,Mac-F1@10,Mic-F1@1,Mic-F1@5,Mic-F1@10
+RAG-Fuse (LLM_RetrieverBERT/acm_is_bio_b25_t50),74.1(3.4),86.6(2.1),87.7(1.8),86.9(1.3),94.7(0.6),94.7(0.6),74.1(3.4),19.3(0.2),10.0(0.0),86.9(1.3),20.0(0.0),10.0(0.0),73.5(2.1),37.0(0.6),28.7(0.0),85.2(0.6),41.1(0.1),33.2(0.0)
