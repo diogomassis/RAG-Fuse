@@ -1,0 +1,2 @@
+,nDCG_tail@1,nDCG_tail@5,nDCG_tail@10,nDCG_head@1,nDCG_head@5,nDCG_head@10,Precision_tail@1,Precision_tail@5,Precision_tail@10,Precision_head@1,Precision_head@5,Precision_head@10,Mac-F1@1,Mac-F1@5,Mac-F1@10,Mic-F1@1,Mic-F1@5,Mic-F1@10
+RAG-Fuse (LLM_RetrieverBERT/books),70.5(20.0),86.4(10.9),86.4(10.9),88.3(17.9),95.1(7.8),95.1(7.8),70.5(20.0),20.0(0.0),10.0(0.0),88.3(17.9),20.0(0.0),10.0(0.0),83.8(12.5),39.2(0.0),39.2(0.0),85.7(9.5),38.9(0.0),38.9(0.0)
