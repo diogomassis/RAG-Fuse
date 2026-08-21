@@ -1,0 +1,2 @@
+,nDCG_tail@1,nDCG_tail@5,nDCG_tail@10,nDCG_head@1,nDCG_head@5,nDCG_head@10,Precision_tail@1,Precision_tail@5,Precision_tail@10,Precision_head@1,Precision_head@5,Precision_head@10,Mac-F1@1,Mac-F1@5,Mac-F1@10,Mic-F1@1,Mic-F1@5,Mic-F1@10
+RAG-Fuse (LLM_RetrieverBERT/dblp_is_e2sc_iterative),67.5(25.4),82.2(17.9),84.1(14.6),81.7(23.1),92.1(10.6),92.1(10.6),67.5(25.4),18.9(2.0),10.0(0.0),81.7(23.1),20.0(0.0),10.0(0.0),77.5(17.7),36.7(1.2),31.8(0.0),81.9(14.4),39.5(0.9),33.4(0.0)
