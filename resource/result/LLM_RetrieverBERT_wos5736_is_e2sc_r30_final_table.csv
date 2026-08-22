@@ -1,0 +1,2 @@
+,nDCG_tail@1,nDCG_tail@5,nDCG_tail@10,nDCG_head@1,nDCG_head@5,nDCG_head@10,Precision_tail@1,Precision_tail@5,Precision_tail@10,Precision_head@1,Precision_head@5,Precision_head@10,Mac-F1@1,Mac-F1@5,Mac-F1@10,Mic-F1@1,Mic-F1@5,Mic-F1@10
+RAG-Fuse (LLM_RetrieverBERT/wos5736_is_e2sc_r30),70.5(30.0),81.8(22.2),84.7(17.4),78.0(22.6),90.7(10.0),90.7(10.0),70.5(30.0),18.3(2.9),10.0(0.0),78.0(22.6),20.0(0.0),10.0(0.0),76.2(17.4),38.4(1.5),29.7(0.0),78.8(14.4),37.4(1.2),28.2(0.0)
